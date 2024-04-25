@@ -2,6 +2,7 @@ package Project;
 import static java.awt.Color.*;
 
 import java.awt.AlphaComposite;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -118,13 +119,11 @@ class RoundedButton extends JButton {
     private int getBorderRadius() {
         return 40;
     }
-    
 }
 
 public class Background extends Component {
     private static JPanel background;
     private static Dashboard dashboardInstance;
-
     public static void setBackgroundDashboardInstance(Dashboard dashboard) {
         dashboardInstance = dashboard;
     }
@@ -173,7 +172,7 @@ public class Background extends Component {
             }
         });
         background.add(searchButton);
-        
+
         RoundedButton dashboardButton = new RoundedButton("Dashboard");
         dashboardButton.setLayout(null);
         dashboardButton.setBounds(-50, 150, 300, 50); 
@@ -190,7 +189,7 @@ public class Background extends Component {
                 if (dashboardInstance != null) {
                     dashboardInstance.onDashboardButtonClick();
                 }
-        }
+            }
         });
 
         RoundedButton taskButton = new RoundedButton("Tasks          ");
@@ -279,18 +278,26 @@ public class Background extends Component {
         list.setForeground(white);
         background.add(list);
 
+        JPanel dashboardPanel = Dashboard.DashboardPanel();
+        Dashboard.setDashboardPanel(dashboardPanel);
+        dashboardPanel.setVisible(false); 
+        background.add(dashboardPanel);
+
         return background;
     }
 
     public static void main(String args[]) {
         JFrame frame = new JFrame();
         JPanel background = BackgroundPanel();
-        JPanel dashboard = Dashboard.DashboardPanel();
+
+        Dashboard dashboard = new Dashboard();
+        Background.setBackgroundDashboardInstance(dashboard); 
 
         frame.setSize(1400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.getContentPane().add(background, BorderLayout.CENTER);
         frame.setVisible(true);
-        frame.add(dashboard);
         frame.add(background);
     }
 }
