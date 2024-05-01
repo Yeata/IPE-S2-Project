@@ -1,7 +1,7 @@
 package Project;
 import static java.awt.Color.*;
-
 import java.awt.AlphaComposite;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -118,16 +118,27 @@ class RoundedButton extends JButton {
     private int getBorderRadius() {
         return 40;
     }
-    
 }
 
 public class Background extends Component {
     private static JPanel background;
     private static Dashboard dashboardInstance;
-
     public static void setBackgroundDashboardInstance(Dashboard dashboard) {
         dashboardInstance = dashboard;
+
+
     }
+
+    // task_field
+    
+    private static Task taskInstance;
+    public static void setBackgroundtaskInstance(Task Task) {
+        taskInstance = Task;
+
+        
+    }
+
+//item in main menu
 
     public static JPanel BackgroundPanel() {
         background = new JPanel() {
@@ -163,7 +174,7 @@ public class Background extends Component {
         searchButton.setBounds(180, 100, 40, 40);
         searchButton.setContentAreaFilled(false);
         searchButton.setBorderPainted(false);
-        ImageIcon SearchIcon = new ImageIcon("Project/assets/ion--search.png");        
+        ImageIcon SearchIcon = new ImageIcon("D:/I352/IPE/Task/IPE-S2-Project/Project/assets/ion--search.png");        
         searchButton.setIcon(SearchIcon);
         searchButton.addActionListener(new ActionListener(){
             @Override
@@ -173,13 +184,13 @@ public class Background extends Component {
             }
         });
         background.add(searchButton);
-        
+
         RoundedButton dashboardButton = new RoundedButton("Dashboard");
         dashboardButton.setLayout(null);
         dashboardButton.setBounds(-50, 150, 300, 50); 
         dashboardButton.setFont(font);
         dashboardButton.setForeground(Color.WHITE);
-        ImageIcon dashboardIcon = new ImageIcon("Project/assets/ri--dashboard-fill.png");
+        ImageIcon dashboardIcon = new ImageIcon("D:/I352/IPE/Task/IPE-S2-Project/Project/assets/ri--dashboard-fill.png");
         dashboardButton.setIcon(dashboardIcon);
         dashboardButton.setContentAreaFilled(false);
         dashboardButton.setBorderPainted(false);
@@ -190,16 +201,20 @@ public class Background extends Component {
                 if (dashboardInstance != null) {
                     dashboardInstance.onDashboardButtonClick();
                 }
-        }
+                if (taskInstance != null) {
+                    taskInstance.onDashboardButtonClick();
+                }
+            }
         });
 
-        RoundedButton taskButton = new RoundedButton("Tasks          ");
+        RoundedButton taskButton = new RoundedButton("Tasks");
         taskButton.setLayout(null);
         taskButton.setBounds(-50,200, 300, 50); 
         taskButton.setFont(font);
         taskButton.setForeground(Color.WHITE);
-        ImageIcon taskIcon = new ImageIcon("Project/assets/octicon--tasklist-24.png");
+        ImageIcon taskIcon = new ImageIcon("D:/I352/IPE/Task/IPE-S2-Project/Project/assets/octicon--tasklist-24.png");
         taskButton.setIcon(taskIcon);
+        
         background.add(taskButton);
         taskButton.addActionListener(new ActionListener() {
             @Override
@@ -207,15 +222,20 @@ public class Background extends Component {
                 if (dashboardInstance != null) {
                     dashboardInstance.onTaskButtonClick();
                 }
+                if (taskInstance != null) {
+                    taskInstance.onTaskButtonClick();
+                }
         }
+
+        
         });
 
-        RoundedButton importantButton = new RoundedButton("Important");
+        RoundedButton importantButton = new RoundedButton("Important  ");
         importantButton.setLayout(null);
         importantButton.setBounds(-50,250, 300, 50); 
         importantButton.setFont(font);
         importantButton.setForeground(Color.WHITE);
-        ImageIcon importantIcon = new ImageIcon("Project/assets/material-symbols--notification-important-outline-rounded.png");
+        ImageIcon importantIcon = new ImageIcon("D:/I352/IPE/Task/IPE-S2-Project/Project/assets/material-symbols--notification-important-outline-rounded.png");
         importantButton.setIcon(importantIcon);
         background.add(importantButton);
         importantButton.addActionListener(new ActionListener() {
@@ -223,6 +243,9 @@ public class Background extends Component {
             public void actionPerformed(ActionEvent e) {
                 if (dashboardInstance != null) {
                     dashboardInstance.onTaskButtonClick();
+                }
+                if (taskInstance != null) {
+                    taskInstance.onImportantButtonClick();
                 }
             }
         });
@@ -232,7 +255,7 @@ public class Background extends Component {
         reminderButton.setBounds(-50,300, 300, 50); 
         reminderButton.setFont(font);
         reminderButton.setForeground(Color.WHITE);
-        ImageIcon reminderIcon = new ImageIcon("Project/assets/quill--remind.png");
+        ImageIcon reminderIcon = new ImageIcon("D:/I352/IPE/Task/IPE-S2-Project/Project/assets/quill--remind.png");
         reminderButton.setIcon(reminderIcon);
         background.add(reminderButton);
         reminderButton.addActionListener(new ActionListener() {
@@ -240,6 +263,9 @@ public class Background extends Component {
             public void actionPerformed(ActionEvent e) {
                 if (dashboardInstance != null) {
                     dashboardInstance.onTaskButtonClick();
+                }
+                if (taskInstance != null) {
+                    taskInstance.onRemindersButtonClick();
                 }
             }
         });
@@ -249,7 +275,7 @@ public class Background extends Component {
         settingsButton.setBounds(-50,350, 300, 50); 
         settingsButton.setFont(font);
         settingsButton.setForeground(Color.WHITE);
-        ImageIcon settingsIcon = new ImageIcon("Project/assets/solar--settings-linear.png");
+        ImageIcon settingsIcon = new ImageIcon("D:/I352/IPE/Task/IPE-S2-Project/Project/assets/solar--settings-linear.png");
         settingsButton.setIcon(settingsIcon);
         background.add(settingsButton);
         settingsButton.addActionListener(new ActionListener() {
@@ -257,6 +283,9 @@ public class Background extends Component {
             public void actionPerformed(ActionEvent e) {
                 if (dashboardInstance != null) {
                     dashboardInstance.onTaskButtonClick();
+                }
+                if (taskInstance != null) {
+                    taskInstance.onSettingsButtonClick();
                 }
             }
         });
@@ -279,18 +308,35 @@ public class Background extends Component {
         list.setForeground(white);
         background.add(list);
 
+        JPanel dashboardPanel = Dashboard.DashboardPanel();
+        Dashboard.setDashboardPanel(dashboardPanel);
+        dashboardPanel.setVisible(false); 
+        background.add(dashboardPanel);
+
+        JPanel taskPanel = Task.createTaskPanel();
+        Task.setTaskPanel(taskPanel);
+        taskPanel.setVisible(false); 
+        background.add(taskPanel);
+
+
         return background;
     }
 
     public static void main(String args[]) {
         JFrame frame = new JFrame();
         JPanel background = BackgroundPanel();
-        JPanel dashboard = Dashboard.DashboardPanel();
+
+        Dashboard dashboard = new Dashboard();
+        Background.setBackgroundDashboardInstance(dashboard); 
+
+        Task Task = new Task();
+        Background.setBackgroundtaskInstance(Task); 
 
         frame.setSize(1400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.getContentPane().add(background, BorderLayout.CENTER);
         frame.setVisible(true);
-        frame.add(dashboard);
         frame.add(background);
     }
 }
