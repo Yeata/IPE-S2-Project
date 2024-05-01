@@ -221,7 +221,7 @@ public class Background extends Component {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (dashboardInstance != null) {
-                    dashboardInstance.onTaskButtonClick();
+                    dashboardInstance.onImportantButtonClick();
                 }
             }
         });
@@ -238,7 +238,7 @@ public class Background extends Component {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (dashboardInstance != null) {
-                    dashboardInstance.onTaskButtonClick();
+                    dashboardInstance.onRemindersButtonClick();
                 }
             }
         });
@@ -255,7 +255,7 @@ public class Background extends Component {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (dashboardInstance != null) {
-                    dashboardInstance.onTaskButtonClick();
+                    dashboardInstance.onSettingsButtonClick();
                 }
             }
         });
