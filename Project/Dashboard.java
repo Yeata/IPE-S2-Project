@@ -1,4 +1,4 @@
-package Project;
+// package Project;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -72,6 +72,38 @@ public class Dashboard extends JFrame implements ButtonClickListener {
                 }
             }
         };
+
+        JPanel taskbar = new JPanel(){
+        protected void paintComponent(Graphics g) {
+            Paint p = new GradientPaint(0.0f, 0.0f, new Color(255, 255, 255, 155),
+                    getWidth(), getHeight(), new Color(255, 255, 255, 155), true);
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setPaint(p);
+            int radius = 20;
+            g2d.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
+            Paint p2 = new GradientPaint(0.0f, 0.0f, new Color(193, 185, 241, 255),
+            getWidth(), getHeight(), new Color(193, 185, 241, 255), true);
+Graphics2D gd = (Graphics2D) g;
+gd.setPaint(p2);
+gd.fillRoundRect(0, 0, getWidth(), 30, radius, 0); // round top corners, flat bottom
+        }
+    };
+    // JPanel taskbar2 = new JPanel(){
+    //     protected void paintComponent(Graphics g) {
+    //         Paint p = new GradientPaint(0.0f, 0.0f, new Color(255, 255, 255, 155),
+    //                 getWidth(), getHeight(), new Color(255, 255, 255, 155), true);
+    //         Graphics2D g2d = (Graphics2D) g;
+    //         g2d.setPaint(p);
+    //         int radius = 20;
+    //         g2d.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
+    //     }
+    // };
+        taskbar.setBounds(50, 100, 600, 120);
+        dashPanel.add(taskbar);
+
+        // taskbar2.setBounds(50, 240, 600, 120);
+        // dashPanel.add(taskbar2);
+
         calendar.setBounds(700, 480, 420, 250);
         dashPanel.add(calendar);
 

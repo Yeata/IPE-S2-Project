@@ -1,4 +1,4 @@
-package Project;
+// package Project;
 import static java.awt.Color.*;
 
 import java.awt.AlphaComposite;
@@ -21,6 +21,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import Project.Important;
+import Project.Task;
 
 class PlaceholderTextField extends JTextField {
     private String placeholder;
@@ -124,9 +127,24 @@ class RoundedButton extends JButton {
 public class Background extends Component {
     private static JPanel background;
     private static Dashboard dashboardInstance;
+    private static Task taskInstance;
+    private static Important importantInstance;
+
     public static void setBackgroundDashboardInstance(Dashboard dashboard) {
         dashboardInstance = dashboard;
     }
+
+    // task_field
+    
+    public static void setBackgroundtaskInstance(Task Task) {
+        taskInstance = Task;
+    }
+
+    public static void setBackgroundImportantInstance(Important important) {
+        importantInstance = important;
+    }
+
+//item in main menu
 
     public static JPanel BackgroundPanel() {
         background = new JPanel() {
@@ -162,7 +180,7 @@ public class Background extends Component {
         searchButton.setBounds(180, 100, 40, 40);
         searchButton.setContentAreaFilled(false);
         searchButton.setBorderPainted(false);
-        ImageIcon SearchIcon = new ImageIcon("Project/assets/ion--search.png");        
+        ImageIcon SearchIcon = new ImageIcon("IPE-S2-Project/Project/assets/ion--search.png");        
         searchButton.setIcon(SearchIcon);
         searchButton.addActionListener(new ActionListener(){
             @Override
@@ -189,16 +207,23 @@ public class Background extends Component {
                 if (dashboardInstance != null) {
                     dashboardInstance.onDashboardButtonClick();
                 }
+                if (taskInstance != null) {
+                    taskInstance.onDashboardButtonClick();
+                }
+                if (importantInstance != null) {
+                    importantInstance.onDashboardButtonClick();
+                }
             }
         });
 
-        RoundedButton taskButton = new RoundedButton("Tasks          ");
+        RoundedButton taskButton = new RoundedButton("Tasks     ");
         taskButton.setLayout(null);
         taskButton.setBounds(-50,200, 300, 50); 
         taskButton.setFont(font);
         taskButton.setForeground(Color.WHITE);
         ImageIcon taskIcon = new ImageIcon("Project/assets/octicon--tasklist-24.png");
         taskButton.setIcon(taskIcon);
+        
         background.add(taskButton);
         taskButton.addActionListener(new ActionListener() {
             @Override
@@ -206,10 +231,16 @@ public class Background extends Component {
                 if (dashboardInstance != null) {
                     dashboardInstance.onTaskButtonClick();
                 }
-        }
+                if (taskInstance != null) {
+                    taskInstance.onTaskButtonClick();
+                }
+                if (importantInstance != null) {
+                    importantInstance.onDashboardButtonClick();
+                }
+            }
         });
 
-        RoundedButton importantButton = new RoundedButton("Important");
+        RoundedButton importantButton = new RoundedButton("Important  ");
         importantButton.setLayout(null);
         importantButton.setBounds(-50,250, 300, 50); 
         importantButton.setFont(font);
@@ -221,7 +252,13 @@ public class Background extends Component {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (dashboardInstance != null) {
-                    dashboardInstance.onImportantButtonClick();
+                    dashboardInstance.onTaskButtonClick();
+                }
+                if (taskInstance != null) {
+                    taskInstance.onImportantButtonClick();
+                }
+                if (importantInstance != null) {
+                    importantInstance.onDashboardButtonClick();
                 }
             }
         });
@@ -238,7 +275,13 @@ public class Background extends Component {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (dashboardInstance != null) {
-                    dashboardInstance.onRemindersButtonClick();
+                    dashboardInstance.onTaskButtonClick();
+                }
+                if (taskInstance != null) {
+                    taskInstance.onRemindersButtonClick();
+                }
+                if (importantInstance != null) {
+                    importantInstance.onDashboardButtonClick();
                 }
             }
         });
@@ -255,7 +298,13 @@ public class Background extends Component {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (dashboardInstance != null) {
-                    dashboardInstance.onSettingsButtonClick();
+                    dashboardInstance.onTaskButtonClick();
+                }
+                if (taskInstance != null) {
+                    taskInstance.onSettingsButtonClick();
+                }
+                if (importantInstance != null) {
+                    importantInstance.onDashboardButtonClick();
                 }
             }
         });
@@ -283,6 +332,12 @@ public class Background extends Component {
         dashboardPanel.setVisible(false); 
         background.add(dashboardPanel);
 
+        JPanel taskPanel = Task.createTaskPanel();
+        Task.setTaskPanel(taskPanel);
+        taskPanel.setVisible(false); 
+        background.add(taskPanel);
+
+
         return background;
     }
 
@@ -292,6 +347,9 @@ public class Background extends Component {
 
         Dashboard dashboard = new Dashboard();
         Background.setBackgroundDashboardInstance(dashboard); 
+
+        // Task Task = new Task();
+        // Background.setBackgroundtaskInstance(Task); 
 
         frame.setSize(1400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
