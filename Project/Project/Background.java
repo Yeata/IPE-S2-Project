@@ -207,7 +207,7 @@ public class Background extends Component {
             }
         });
 
-        RoundedButton taskButton = new RoundedButton("Tasks");
+        RoundedButton taskButton = new RoundedButton("Tasks        ");
         taskButton.setLayout(null);
         taskButton.setBounds(-50,200, 300, 50); 
         taskButton.setFont(font);
