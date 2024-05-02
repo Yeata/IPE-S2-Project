@@ -125,10 +125,10 @@ public class Background extends Component {
     private static Task taskInstance;
     private static Important importantInstance;
 
+
     public static void setBackgroundDashboardInstance(Dashboard dashboard) {
         dashboardInstance = dashboard;
     }
-
     // task_field
     
     public static void setBackgroundtaskInstance(Task Task) {
@@ -211,7 +211,7 @@ public class Background extends Component {
             }
         });
 
-        RoundedButton taskButton = new RoundedButton("Tasks        ");
+        RoundedButton taskButton = new RoundedButton("Tasks           ");
         taskButton.setLayout(null);
         taskButton.setBounds(-50,200, 300, 50); 
         taskButton.setFont(font);
@@ -235,7 +235,7 @@ public class Background extends Component {
             }
         });
 
-        RoundedButton importantButton = new RoundedButton("Important  ");
+        RoundedButton importantButton = new RoundedButton("Important ");
         importantButton.setLayout(null);
         importantButton.setBounds(-50,250, 300, 50); 
         importantButton.setFont(font);

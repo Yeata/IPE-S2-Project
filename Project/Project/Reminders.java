@@ -9,12 +9,12 @@ import java.awt.Paint;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Important extends JFrame implements ButtonClickListener {
+public class Reminders extends JFrame implements ButtonClickListener {
 
-    private static JPanel ImportantPanel;
+    private static JPanel ReminderPanel;
 
-    public static JPanel ImportantPanel() {
-        JPanel important = new JPanel(null) {
+    public static JPanel ReminderPanel() {
+        JPanel reminderPanel = new JPanel(null) {
             protected void paintComponent(Graphics g) {
                 Paint p = new GradientPaint(0.0f, 0.0f, new Color(255, 255, 255, 125),
                         getWidth(), getHeight(), new Color(255, 255, 255, 125), true);
@@ -24,37 +24,37 @@ public class Important extends JFrame implements ButtonClickListener {
                 g2d.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
             }
         };
-        important.setBounds(250, 0, 1200, 763);
+        reminderPanel.setBounds(250, 0, 1200, 763);
 
-        return important;
+        return reminderPanel;
     }
 
     @Override
     public void onDashboardButtonClick() {
-        ImportantPanel.setVisible(false);
+        ReminderPanel.setVisible(false);
     }
 
     @Override
     public void onTaskButtonClick() {
-        ImportantPanel.setVisible(false);
+        ReminderPanel.setVisible(false);
     }
 
     @Override
     public void onImportantButtonClick() {
-        ImportantPanel.setVisible(true);
+        ReminderPanel.setVisible(false);
     }
 
     @Override
     public void onRemindersButtonClick() {
-        ImportantPanel.setVisible(false);
+        ReminderPanel.setVisible(true);
     }
 
     @Override
     public void onSettingsButtonClick() {
-        ImportantPanel.setVisible(false);
+        ReminderPanel.setVisible(false);
     }
 
-    public static void setImportantPanel(JPanel panel) {
-        ImportantPanel = panel;
+    public static void setReminderPanel(JPanel panel) {
+        ReminderPanel = panel;
     }
 }
