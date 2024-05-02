@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 21e46e68245d5e5b37f5c7bda78a26dcfcc3ffde
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
@@ -12,29 +15,30 @@ import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-public class CreateNewTask {
-    private static JFrame f1;
-    private static JFrame f2;
-    private static DefaultTableModel model;
-    private static JTable table;
+public class CreateNewTask extends JFrame {
+    private JFrame f1;
+    private JFrame f2;
+    private DefaultTableModel model;
+    private JTable table;
+
+    public CreateNewTask() {
+        Task_List();
+    }
 
     private static Border createRoundedBorder(int radius) {
         return BorderFactory.createEmptyBorder(radius, radius, radius, radius);
     }
 
-    public static void main(String[] args) {
-        Task_List();
-    }
-
-    public static void Task_List() {
+    public void Task_List() {
         f1 = new JFrame("Task List");
         f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        f1.setSize(700, 800);
+        f1.setLayout(null);
+        f1.setResizable(false);
         JLabel title = new JLabel("Task List");
         title.setBounds(15, 15, 200, 50);
         title.setFont(new Font("Itim", Font.BOLD, 23));
         f1.add(title);
-
         JButton btn = new JButton("Create New Task");
         btn.setBounds(500, 18, 158, 47);
         btn.setPreferredSize(new Dimension(150, 40));
@@ -42,7 +46,6 @@ public class CreateNewTask {
         btn.setFocusPainted(false);
         btn.setBorder(createRoundedBorder(30));
         f1.add(btn);
-
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,25 +53,16 @@ public class CreateNewTask {
                 f1.setVisible(false);
             }
         });
-
         model = new DefaultTableModel();
         model.addColumn("Title");
         model.addColumn("Assignee");
         model.addColumn("Deadline");
         model.addColumn("Description");
-
-        model.addRow(new Object[] { "Task", "Yung Nita", "06/01/2024 23:59", "Create tasklist" });
-        model.addRow(new Object[] { "Dashboard", "Yon Samphorslita", "06/01/2024 23:59", "Create Dashborad" });
-        model.addRow(new Object[] { "Task", "Yous Yeata", "06/01/2024 23:59", "Task Drag and drop" });
-        model.addRow(new Object[] { "Dasboard", "Thorn SreyNeth", "06/01/2024 23:59", "Create Dashoard" });
-        model.addRow(new Object[] { "Task", "Sounngy Hanny", "06/01/2024 23:59", "Create task detail" });
-
+        populateTableWithInitialData();
         table = new JTable(model);
-
         table.getTableHeader().setFont(new Font("Itim", Font.PLAIN, 13));
         table.getTableHeader().setPreferredSize(new Dimension(table.getColumnModel().getTotalColumnWidth(), 35));
         table.setRowHeight(40);
-
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             private static final long serialVersionUID = 1L;
 
@@ -85,21 +79,20 @@ public class CreateNewTask {
                 return component;
             }
         });
-
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(-5, 100, 690, 700);
         scrollPane.setBorder(createRoundedBorder(30));
         f1.add(scrollPane);
-
-        f1.setSize(700, 900);
-        f1.setLayout(null);
         f1.setVisible(true);
-        f1.setResizable(false);
     }
 
-    public static void Create_New_Task() {
+    public void Create_New_Task() {
+
         f2 = new JFrame("Create New Task");
         f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f2.setSize(490, 900);
+        f2.setLayout(null);
+        f2.setResizable(false);
 
         JLabel createNewTask = new JLabel("Create New Task");
         createNewTask.setBounds(20, 10, 300, 50);
@@ -133,28 +126,27 @@ public class CreateNewTask {
         f2.add(assigneeField);
 
         JDateChooser deadlineField = new JDateChooser();
-        deadlineField.setBounds(90, 335, 350, 90);
+        deadlineField.setBounds(35, 335, 390, 50);
         deadlineField.setBorder(createRoundedBorder(20));
         f2.add(deadlineField);
 
         JLabel dateLabel = new JLabel("Date:");
-        dateLabel.setBounds(65, 355, 100, 45);
+        dateLabel.setBounds(35, 300, 100, 45);
         f2.add(dateLabel);
 
         SpinnerDateModel spinnerModel = new SpinnerDateModel();
         spinnerModel.setCalendarField(Calendar.MINUTE);
         JSpinner timeSpinner = new JSpinner(spinnerModel);
-
         JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm");
+
         timeSpinner.setEditor(timeEditor);
-
-        JLabel timeLabel = new JLabel("Time:");
-        timeLabel.setBounds(65, 450, 100, 45);
-        f2.add(timeLabel);
-
         timeSpinner.setBounds(90, 430, 95, 80);
         timeSpinner.setBorder(createRoundedBorder(20));
         f2.add(timeSpinner);
+
+        JLabel timeLabel = new JLabel("Time:");
+        timeLabel.setBounds(35, 400, 100, 45);
+        f2.add(timeLabel);
 
         JTextField descriptionField = new JTextField();
         descriptionField.setBounds(35, 560, 390, 60);
@@ -178,22 +170,18 @@ public class CreateNewTask {
         saveButton.addActionListener(e -> {
             String title = titleField.getText();
             String assignee = assigneeField.getText();
-
             Date date = deadlineField.getDate();
             Date time = (Date) timeSpinner.getValue();
 
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
-
             Calendar timeCalendar = Calendar.getInstance();
             timeCalendar.setTime(time);
             calendar.set(Calendar.HOUR_OF_DAY, timeCalendar.get(Calendar.HOUR_OF_DAY));
             calendar.set(Calendar.MINUTE, timeCalendar.get(Calendar.MINUTE));
 
             Date deadline = calendar.getTime();
-
             String description = descriptionField.getText();
-
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             String formattedDeadline = dateFormat.format(deadline);
 
@@ -208,15 +196,18 @@ public class CreateNewTask {
             f2.setVisible(false);
             f1.setVisible(true);
         });
-
         backButton.addActionListener(e -> {
             f2.setVisible(false);
             f1.setVisible(true);
         });
-
-        f2.setSize(490, 900);
-        f2.setLayout(null);
         f2.setVisible(true);
-        f2.setResizable(false);
+    }
+
+    private void populateTableWithInitialData() {
+        model.addRow(new Object[] { "Task", "Yung Nita", "06/01/2024 23:59", "Create tasklist" });
+        model.addRow(new Object[] { "Dashboard", "Yon Samphorslita", "06/01/2024 23:59", "Create Dashboard" });
+        model.addRow(new Object[] { "Task", "Yous Yeata", "06/01/2024 23:59", "Task Drag and drop" });
+        model.addRow(new Object[] { "Dasboard", "Thorn SreyNeth", "06/01/2024 23:59", "Create Dashboard" });
+        model.addRow(new Object[] { "Task", "Sounngy Hanny", "06/01/2024 23:59", "Create task detail" });
     }
 }
