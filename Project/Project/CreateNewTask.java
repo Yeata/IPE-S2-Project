@@ -1,3 +1,5 @@
+
+
 import com.toedter.calendar.JDateChooser;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,11 +9,10 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.BorderFactory;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-public class CreateTaskList {
+public class CreateNewTask {
     private static JFrame f1;
     private static JFrame f2;
     private static DefaultTableModel model;
