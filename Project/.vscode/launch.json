@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Background",
+            "request": "launch",
+            "mainClass": "Project.Background",
+            "projectName": "Project_504912a9"
+        }
+    ]
+}
