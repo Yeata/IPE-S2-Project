@@ -1,4 +1,5 @@
 package Project;
+
 import static java.awt.Color.*;
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
@@ -33,6 +34,7 @@ class PlaceholderTextField extends JTextField {
         setForeground(Color.WHITE);
         setBorder(null);
     }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -46,28 +48,33 @@ class PlaceholderTextField extends JTextField {
             g2.drawString(placeholder, x, y);
             g2.dispose();
         }
-    }    
+    }
+
     @Override
     protected void paintBorder(Graphics g) {
-    Graphics2D g2d = (Graphics2D) g.create();
-    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    g2d.setColor(Color.WHITE);
-    g2d.drawRoundRect(1, 0, getWidth() -1, getHeight() -1, borderRadius, borderRadius);
-    g2d.dispose();
-}
+        Graphics2D g2d = (Graphics2D) g.create();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setColor(Color.WHITE);
+        g2d.drawRoundRect(1, 0, getWidth() - 1, getHeight() - 1, borderRadius, borderRadius);
+        g2d.dispose();
+    }
 }
 
 interface ButtonClickListener {
     void onDashboardButtonClick();
+
     void onTaskButtonClick();
+
     void onImportantButtonClick();
+
     void onRemindersButtonClick();
+
     void onSettingsButtonClick();
 
 }
 
 class RoundedButton extends JButton {
-    private static RoundedButton currentButton = null; 
+    private static RoundedButton currentButton = null;
     private boolean pressed;
 
     public RoundedButton(String text) {
@@ -111,6 +118,7 @@ class RoundedButton extends JButton {
         this.pressed = pressed;
         repaint();
     }
+
     private boolean isPressed() {
         return this.pressed;
     }
@@ -123,22 +131,22 @@ class RoundedButton extends JButton {
 public class Background extends Component {
     private static JPanel background;
     private static Dashboard dashboardInstance;
+
     public static void setBackgroundDashboardInstance(Dashboard dashboard) {
         dashboardInstance = dashboard;
-
 
     }
 
     // task_field
-    
+
     private static Task taskInstance;
+
     public static void setBackgroundtaskInstance(Task Task) {
         taskInstance = Task;
 
-        
     }
 
-//item in main menu
+    // item in main menu
 
     public static JPanel BackgroundPanel() {
         background = new JPanel() {
@@ -161,7 +169,7 @@ public class Background extends Component {
         logo.setBounds(100, 40, 100, 50);
         logo.setForeground(Color.WHITE);
         background.add(logo);
-        
+
         PlaceholderTextField searchField = new PlaceholderTextField("Search", 40, 10);
         searchField.setFont(new Font("Itim", Font.PLAIN, 15));
         searchField.setBounds(20, 100, 200, 40);
@@ -174,11 +182,11 @@ public class Background extends Component {
         searchButton.setBounds(180, 100, 40, 40);
         searchButton.setContentAreaFilled(false);
         searchButton.setBorderPainted(false);
-        ImageIcon SearchIcon = new ImageIcon("D:/I352/IPE/Task/IPE-S2-Project/Project/assets/ion--search.png");        
+        ImageIcon SearchIcon = new ImageIcon("D:/I352/IPE/Task/IPE-S2-Project/Project/assets/ion--search.png");
         searchButton.setIcon(SearchIcon);
-        searchButton.addActionListener(new ActionListener(){
+        searchButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 String searchText = searchField.getText();
                 System.out.println("Search for: " + searchText);
             }
@@ -187,10 +195,11 @@ public class Background extends Component {
 
         RoundedButton dashboardButton = new RoundedButton("Dashboard");
         dashboardButton.setLayout(null);
-        dashboardButton.setBounds(-50, 150, 300, 50); 
+        dashboardButton.setBounds(-50, 150, 300, 50);
         dashboardButton.setFont(font);
         dashboardButton.setForeground(Color.WHITE);
-        ImageIcon dashboardIcon = new ImageIcon("D:/I352/IPE/Task/IPE-S2-Project/Project/assets/ri--dashboard-fill.png");
+        ImageIcon dashboardIcon = new ImageIcon(
+                "D:/I352/IPE/Task/IPE-S2-Project/Project/assets/ri--dashboard-fill.png");
         dashboardButton.setIcon(dashboardIcon);
         dashboardButton.setContentAreaFilled(false);
         dashboardButton.setBorderPainted(false);
@@ -209,12 +218,12 @@ public class Background extends Component {
 
         RoundedButton taskButton = new RoundedButton("Tasks");
         taskButton.setLayout(null);
-        taskButton.setBounds(-50,200, 300, 50); 
+        taskButton.setBounds(-50, 200, 300, 50);
         taskButton.setFont(font);
         taskButton.setForeground(Color.WHITE);
         ImageIcon taskIcon = new ImageIcon("D:/I352/IPE/Task/IPE-S2-Project/Project/assets/octicon--tasklist-24.png");
         taskButton.setIcon(taskIcon);
-        
+
         background.add(taskButton);
         taskButton.addActionListener(new ActionListener() {
             @Override
@@ -225,17 +234,17 @@ public class Background extends Component {
                 if (taskInstance != null) {
                     taskInstance.onTaskButtonClick();
                 }
-        }
+            }
 
-        
         });
 
         RoundedButton importantButton = new RoundedButton("Important  ");
         importantButton.setLayout(null);
-        importantButton.setBounds(-50,250, 300, 50); 
+        importantButton.setBounds(-50, 250, 300, 50);
         importantButton.setFont(font);
         importantButton.setForeground(Color.WHITE);
-        ImageIcon importantIcon = new ImageIcon("D:/I352/IPE/Task/IPE-S2-Project/Project/assets/material-symbols--notification-important-outline-rounded.png");
+        ImageIcon importantIcon = new ImageIcon(
+                "D:/I352/IPE/Task/IPE-S2-Project/Project/assets/material-symbols--notification-important-outline-rounded.png");
         importantButton.setIcon(importantIcon);
         background.add(importantButton);
         importantButton.addActionListener(new ActionListener() {
@@ -252,7 +261,7 @@ public class Background extends Component {
 
         RoundedButton reminderButton = new RoundedButton("Reminders");
         reminderButton.setLayout(null);
-        reminderButton.setBounds(-50,300, 300, 50); 
+        reminderButton.setBounds(-50, 300, 300, 50);
         reminderButton.setFont(font);
         reminderButton.setForeground(Color.WHITE);
         ImageIcon reminderIcon = new ImageIcon("D:/I352/IPE/Task/IPE-S2-Project/Project/assets/quill--remind.png");
@@ -272,10 +281,11 @@ public class Background extends Component {
 
         RoundedButton settingsButton = new RoundedButton("Settings    ");
         settingsButton.setLayout(null);
-        settingsButton.setBounds(-50,350, 300, 50); 
+        settingsButton.setBounds(-50, 350, 300, 50);
         settingsButton.setFont(font);
         settingsButton.setForeground(Color.WHITE);
-        ImageIcon settingsIcon = new ImageIcon("D:/I352/IPE/Task/IPE-S2-Project/Project/assets/solar--settings-linear.png");
+        ImageIcon settingsIcon = new ImageIcon(
+                "D:/I352/IPE/Task/IPE-S2-Project/Project/assets/solar--settings-linear.png");
         settingsButton.setIcon(settingsIcon);
         background.add(settingsButton);
         settingsButton.addActionListener(new ActionListener() {
@@ -296,10 +306,10 @@ public class Background extends Component {
                 super.paintComponent(g);
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setColor(Color.WHITE);
-                g2d.drawLine(20, 400, 320, 400); 
+                g2d.drawLine(20, 400, 320, 400);
             }
         };
-        linePanel.setBounds(0, 410, 250, 1); 
+        linePanel.setBounds(0, 410, 250, 1);
         background.add(linePanel);
 
         JLabel list = new JLabel("+ New List");
@@ -310,14 +320,13 @@ public class Background extends Component {
 
         JPanel dashboardPanel = Dashboard.DashboardPanel();
         Dashboard.setDashboardPanel(dashboardPanel);
-        dashboardPanel.setVisible(false); 
+        dashboardPanel.setVisible(false);
         background.add(dashboardPanel);
 
         JPanel taskPanel = Task.createTaskPanel();
         Task.setTaskPanel(taskPanel);
-        taskPanel.setVisible(false); 
+        taskPanel.setVisible(false);
         background.add(taskPanel);
-
 
         return background;
     }
@@ -327,10 +336,10 @@ public class Background extends Component {
         JPanel background = BackgroundPanel();
 
         Dashboard dashboard = new Dashboard();
-        Background.setBackgroundDashboardInstance(dashboard); 
+        Background.setBackgroundDashboardInstance(dashboard);
 
         Task Task = new Task();
-        Background.setBackgroundtaskInstance(Task); 
+        Background.setBackgroundtaskInstance(Task);
 
         frame.setSize(1400, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

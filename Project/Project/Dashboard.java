@@ -1,4 +1,5 @@
 package Project;
+
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -56,5 +57,4 @@ public class Dashboard extends JFrame implements ButtonClickListener {
         dashboardPanel = panel;
     }
 
-    
 }
